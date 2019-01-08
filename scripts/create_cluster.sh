@@ -61,12 +61,10 @@ metadata:
     kops.k8s.io/cluster: ${K8_NAME}
   name: nodes
 spec:
-  machineType: t2.xlarge
-  maxPrice: "0.0743"
+  machineType: m4.xlarge
+  maxPrice: "0.0664"
   maxSize: 1
   minSize: 1
-  rootVolumeSize: 64
-  rootVolumeType: standard
   role: Node
   subnets:
   - ${K8_AWS_AZ}
@@ -83,8 +81,6 @@ spec:
   machineType: m3.medium
   maxSize: 1
   minSize: 1
-  rootVolumeSize: 32
-  rootVolumeType: standard
   role: Master
   subnets:
   - ${K8_AWS_AZ}
@@ -96,11 +92,13 @@ while [ 1 ]; do
     kops validate cluster ${K8_NAME} && break || sleep 30
 done;
 
-# echo "Installing dashboard"
-# ./install_dashboard.sh
+cd installation
+echo "Installing dashboard"
+./install_dashboard.sh
+cd -
 
-# if [ $? -eq 0 ]; then
-#     echo "INSTALLATION SCRIPTS COMPLETE"
-# else
-#     echo "ERROR IN INSTALLATION SCRIPTS"
-# fi
+if [ $? -eq 0 ]; then
+    echo "INSTALLATION SCRIPTS COMPLETE"
+else
+    echo "ERROR IN INSTALLATION SCRIPTS"
+fi
