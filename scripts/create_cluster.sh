@@ -95,6 +95,12 @@ done;
 cd installation
 echo "Installing dashboard"
 ./install_dashboard.sh
+echo "Installing tiller"
+./install_tiller.sh
+echo "Installing jupyter hub" # NEED A RETRY UNTIL TILLER READY
+while [ 1 ]; do
+    ./install_jhub.sh && break || sleep 5
+done;
 cd -
 
 if [ $? -eq 0 ]; then
