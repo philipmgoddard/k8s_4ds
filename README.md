@@ -1,6 +1,6 @@
 # K8's for DS
 
-A repo to accompany my blog posts
+A repo to accompany my blog posts. This branch accompanies post 1: getting Kubernetes set up.
 
 ```bash
 # I suggest adding these to your zsh/bash profile
