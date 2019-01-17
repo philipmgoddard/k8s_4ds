@@ -7,9 +7,12 @@ NAMESPACE=jhub
 cat << EOF > jupyterconfig.yaml
 proxy:
   secretToken: "$(openssl rand -hex 32)"
+  service:
+    type: NodePort
 singleuser:
   image:
-    name: jupyter/scipy-notebook:87210526f381
+    name: jupyter/scipy-notebook
+    tag: 87210526f381
   memory:
     limit: 8G
     guarantee: 1G
@@ -29,8 +32,3 @@ helm upgrade --install $RELEASE jupyterhub/jupyterhub \
 
 
 
-# get external ip with this to point your browser
-# kubectl get service --namespace jhub
-
-# hop into pod
-# kubectl exec -it jupyter-phil -n jhub bash

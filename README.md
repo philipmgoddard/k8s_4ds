@@ -1,6 +1,6 @@
 # K8's for DS
 
-A repo to accompany my blog posts
+A repo to accompany my blog posts. This branch is for post 2: setting up a Jupyter Hub on Kubernetes
 
 ```bash
 # I suggest adding these to your zsh/bash profile
@@ -18,45 +18,3 @@ To get the token for the dashboard, after running `kubectl proxy` run
 ```bash
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dashboard-admin | awk '{print $1}')
 ```
-
-To get IP for jupyterhub, run
-
-```bash
-kubectl get service --namespace jhub
-```
-
-
-First, difficulty is with public ip of load balancer
-Set up hub
-First install takes a while
-DO NOT start any notebooks
-Go to github, make an authenticator
-Add this to jupyterconfig.yaml
-```yaml
-auth:
-  type: github
-  github:
-    clientId: [ID]
-    clientSecret: [SECRTE]
-    callbackUrl: [callback url]
-  whitelist:
-    users:
-      - philipmgoddard
-  admin:
-    users:
-      - philipmgoddard
-```
-Then run ```helm upgrade  jhub jupyterhub/jupyterhub --namespace jhub --version 0.7.0 -f jupyterconfig.yaml --recreate-pods```
-
-
-
-Questions on PV's
-https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-snapshot-and-restore-volume-from-snapshot-support
-
-try this?? just sync to S3??
-
-https://serverfault.com/questions/759484/sync-a-folder-on-ubuntu-server-with-amazon-s3-bucket-automatically
-
-https://github.com/s3fs-fuse/s3fs-fuse
-
-will have to use secrets etc - fine!
