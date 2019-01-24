@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jupyterhub-phil
+spec:
+  clusterIP: None
+  selector:
+    app: jupyter-phil
+  ports:
+  - protocol: TCP
+    port: 9090
+    targetPort: 9090

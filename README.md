@@ -73,8 +73,8 @@ example 4: jupyetr
 make the service, make the pod
 start notebook, and update
 
+why isnt service for driver made in jhub namespace
 
-try using docker stack version?
 
 import os
 os.environ["PYSPARK_DRIVER_PYTHON"] = "/opt/conda/bin/python3.6"
@@ -88,7 +88,7 @@ spark = (pyspark.sql
          .master("k8s://https://kubernetes.default")
          .config("spark.submit.deployMode", "client")
          # this is the service
-         .config("spark.driver.host", "jupyterhub-phil")
+         .config("spark.driver.host", "jupyterhub-phil") # hmm this lives in default namespace??? made a version in jhub
          .config("spark.driver.port", 9090)
          # this is the pod
          .config("spark.driver.pod.name", "jupyter-phil")
@@ -97,9 +97,9 @@ spark = (pyspark.sql
          .config("spark.kubernetes.executor.limit.cores", 2)
          .config("spark.executor.cores",1)
          .config("spark.driver.cores", 1)
-         .config("spark.kubernetes.container.image", "docker.io/phigod/spark-py:v2.4.0") # what should this be??
+         .config("spark.kubernetes.container.image", "docker.io/phigod/spark-py:v2.4.0")
          .config("spark.kubernetes.allocation.batch.size",1)
-         .config("spark.kubernetes.namespace", "jhub") # MAKE SURE CORRECT NAMESPACE
+         .config("spark.kubernetes.namespace", "jhub")
          .config("spark.kubernetes.authenticate.driver.serviceAccountName", "jupyter-notebook")
          .getOrCreate())
 
