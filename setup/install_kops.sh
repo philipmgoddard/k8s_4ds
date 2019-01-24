@@ -1,10 +1,9 @@
-# aws - follow instructions to install with pip and configure
+# aws cli - follow instructions to install with pip and configure
 
-# kubectl - follow instructions
+# kubectl - follow instructions https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl
 
-https://github.com/kubernetes/kops/blob/master/docs/aws.md
 
-# kops
+# kops https://github.com/kubernetes/kops/blob/master/docs/aws.md
 curl -Lo kops https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
 chmod +x ./kops
 sudo mv ./kops /usr/local/bin/

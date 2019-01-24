@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spark-driver
+spec:
+  clusterIP: None
+  selector:
+    app: spark-pod
+  ports:
+  - protocol: TCP
+    port: 9090
+    targetPort: 9090
